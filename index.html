@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2000년대 한국 드라마 백과사전</title>
+<style>
+:root{
+  --sky1:#3a3a3a;--sky2:#1a1a1a;--sky3:#e4e4e4;
+  --grass1:#f5d66b;--grass2:#b8860b;
+  --ink:#111111;--glass:rgba(255,255,255,.55);--glass-b:rgba(255,255,255,.85);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--ink);
+  font-family:"Segoe UI","Frutiger","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 10%,rgba(255,255,255,.9),transparent 60%),
+    radial-gradient(ellipse 50% 30% at 85% 20%,rgba(255,255,255,.7),transparent 60%),
+    linear-gradient(180deg,#050505 0%,#1c1c1c 38%,#4a4a4a 62%,#e0bd55 88%,#a87d10 100%);
+  background-attachment:fixed;
+}
+/* bubbles */
+.bubble{position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.25) 35%,rgba(160,160,160,.2) 70%,rgba(255,255,255,.5));
+  border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 -8px 18px rgba(255,255,255,.4),0 4px 16px rgba(0,0,0,.3);
+  animation:float 12s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-30px) translateX(10px)}}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+header{text-align:center;padding:30px 10px 10px}
+.logo{display:inline-block;padding:14px 34px;border-radius:60px;
+  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.4) 50%,rgba(255,255,255,.25) 51%,rgba(255,255,255,.55));
+  border:1px solid #fff;box-shadow:0 8px 30px rgba(0,0,0,.45),inset 0 2px 6px #fff}
+h1{margin:0;font-size:clamp(26px,5vw,46px);letter-spacing:-1px;
+  color:#000;font-weight:900}
+.sub{margin:10px 0 0;color:#f3dc8a;font-weight:600;text-shadow:0 1px 0 rgba(255,255,255,.8)}
+.panel{background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--glass-b);border-radius:22px;box-shadow:0 8px 28px rgba(0,0,0,.25),inset 0 1px 0 #fff,inset 0 -20px 30px rgba(255,255,255,.12)}
+.controls{margin:22px 0;padding:16px;display:flex;flex-direction:column;gap:12px}
+#q{width:100%;padding:13px 20px;border-radius:40px;font-size:16px;color:var(--ink);
+  border:1px solid #999999;background:linear-gradient(180deg,#f4f4f4,#fff);
+  box-shadow:inset 0 3px 8px rgba(0,0,0,.35);outline:none}
+#q:focus{border-color:#1a1a1a;box-shadow:inset 0 3px 8px rgba(0,0,0,.35),0 0 0 4px rgba(240,198,64,.5)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{cursor:pointer;border:1px solid #000000;border-radius:30px;padding:7px 16px;font-size:14px;font-weight:700;color:#fff;
+  font-family:inherit;text-shadow:0 -1px 0 rgba(0,0,0,.6);
+  background:linear-gradient(180deg,#6a6a6a 0%,#2e2e2e 49%,#141414 50%,#444444 100%);
+  box-shadow:0 3px 6px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.9);transition:.15s}
+.chip:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.chip.on{background:linear-gradient(180deg,#fff0a8 0%,#f0c640 49%,#c8981a 50%,#f8d760 100%);border-color:#8a6508;text-shadow:0 -1px 0 rgba(90,60,0,.55)}
+.row-label{font-size:13px;font-weight:800;color:#1c1c1c;margin-right:4px;align-self:center}
+.stats{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.stat{padding:10px 22px;text-align:center;border-radius:40px}
+.stat b{display:block;font-size:24px;color:#222222}
+.stat span{font-size:12px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.card{position:relative;overflow:hidden;padding:18px 18px 16px;border-radius:22px;cursor:pointer;
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(228,228,228,.55));
+  border:1px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,.25),inset 0 2px 0 #fff;transition:.2s}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:46%;
+  background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.05));border-radius:22px 22px 60% 60%/22px 22px 24px 24px;pointer-events:none}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,.35),inset 0 2px 0 #fff}
+.year{position:relative;display:inline-block;padding:3px 12px;border-radius:20px;font-size:13px;font-weight:800;color:#fff;
+  background:linear-gradient(180deg,#ffe27a,#c8981a);border:1px solid #8a6508;text-shadow:0 -1px 0 rgba(90,60,0,.55);box-shadow:inset 0 1px 1px #fff6c8}
+.card h2{position:relative;margin:10px 0 0;font-size:21px;letter-spacing:-.5px;color:#111111}
+.en{position:relative;font-size:12px;color:#6a6a6a;font-style:italic;margin-bottom:8px}
+.meta{position:relative;font-size:13px;line-height:1.6}
+.meta b{color:#1c1c1c}
+.tag{display:inline-block;margin:6px 4px 0 0;padding:2px 10px;font-size:12px;font-weight:700;border-radius:14px;
+  background:linear-gradient(180deg,#fff,#e0e0e0);border:1px solid #a0a0a0;color:#1c1c1c}
+.empty{text-align:center;padding:50px;font-weight:700;display:none}
+/* modal */
+#modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.65);backdrop-filter:blur(4px)}
+#modal.show{display:flex}
+.dlg{max-width:560px;width:100%;padding:28px;border-radius:26px;position:relative;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(228,228,228,.88));border:1px solid #fff;box-shadow:0 20px 60px rgba(0,0,0,.7),inset 0 2px 0 #fff;max-height:90vh;overflow:auto}
+.dlg h3{margin:6px 0 2px;font-size:28px;color:#111111}
+.dlg p{line-height:1.75;margin:12px 0}
+.x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;cursor:pointer;color:#fff;font-weight:900;font-size:16px;
+  border:1px solid #a52a1a;background:linear-gradient(180deg,#ff9a8a,#e5392a 50%,#c41f10 51%,#ff6a55);box-shadow:inset 0 1px 1px #ffd0c8,0 2px 5px rgba(0,0,0,.3)}
+.timeline{margin-top:30px;padding:20px}
+.timeline h2{margin:0 0 12px;color:#111111}
+.tl{display:flex;flex-wrap:wrap;gap:10px}
+.tl div{flex:1 1 150px;padding:12px;border-radius:16px;background:linear-gradient(180deg,#fff,#e6e6e6);border:1px solid #a8a8a8;font-size:13px;line-height:1.5}
+.tl b{display:block;color:#a87d10;font-size:15px}
+footer{text-align:center;margin-top:36px;font-size:12px;font-weight:600;color:#f3dc8a;text-shadow:0 1px 0 rgba(255,255,255,.7)}
+</style>
+</head>
+<body>
+<div class="bubble" style="width:120px;height:120px;left:5%;top:18%"></div>
+<div class="bubble" style="width:70px;height:70px;left:88%;top:35%;animation-delay:-3s"></div>
+<div class="bubble" style="width:200px;height:200px;left:75%;top:65%;animation-delay:-6s"></div>
+<div class="bubble" style="width:50px;height:50px;left:15%;top:70%;animation-delay:-8s"></div>
+
+<div class="wrap">
+  <header>
+    <div class="logo"><h1>📺 2000년대 한국 드라마 백과사전</h1></div>
+    <p class="sub">한류의 시작부터 황금기까지 · 2000 – 2009</p>
+  </header>
+
+  <div class="panel controls">
+    <input id="q" type="search" placeholder="🔍 제목, 배우, 방송사로 검색해 보세요 (예: 현빈, MBC, 대장금)">
+    <div class="chips" id="gen"><span class="row-label">장르</span></div>
+    <div class="chips" id="yr"><span class="row-label">연도</span></div>
+  </div>
+
+  <div class="stats">
+    <div class="panel stat"><b id="sc">0</b><span>검색된 작품</span></div>
+    <div class="panel stat"><b id="st">0</b><span>수록 작품</span></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="panel empty" id="empty">😢 검색 결과가 없어요</div>
+
+  <div class="panel timeline">
+    <h2>🕰️ 연대기로 보는 2000년대</h2>
+    <div class="tl">
+      <div><b>2000–2002</b>〈가을동화〉〈겨울연가〉가 아시아에 한류 열풍을 일으키다.</div>
+      <div><b>2003–2005</b>〈대장금〉〈파리의 연인〉〈내 이름은 김삼순〉, 시청률과 화제성의 전성기.</div>
+      <div><b>2006–2007</b>〈주몽〉〈커피프린스 1호점〉〈하얀거탑〉, 사극·로코·메디컬의 다변화.</div>
+      <div><b>2008–2009</b>〈베토벤 바이러스〉〈꽃보다 남자〉〈선덕여왕〉, 원작 각색과 대형 사극.</div>
+    </div>
+  </div>
+
+  <footer>© 2000s K-Drama Encyclopedia · Frutiger Aero style · 방송사·연도는 대표 방영 기준</footer>
+</div>
+
+<div id="modal"><div class="dlg" id="dlg"></div></div>
+
+<script>
+const D=[
+["가을동화","Autumn in My Heart","2000","KBS2","멜로","송승헌, 송혜교, 원빈","운명처럼 뒤바뀐 두 남녀와 남매의 사랑을 그린 윤석호 감독의 '사계' 시리즈 첫 작품. 한류 확산의 신호탄이 되었다."],
+["별은 내 가슴에","Stars in My Heart","2001","SBS","멜로","안재욱, 김희선","톱스타 김희선과 안재욱의 로맨스로 중화권에서 큰 인기를 얻어 초기 한류를 이끌었다."],
+["상도","Sangdo","2001","MBC","사극","이재룡, 이덕화","조선 후기 거상 임상옥의 일대기를 그린 대하 사극. 장사의 도(道)를 주제로 했다."],
+["겨울연가","Winter Sonata","2002","KBS2","멜로","배용준, 최지우","첫사랑과 기억 상실을 소재로 한 순애보. 일본에서 '욘사마' 열풍을 일으키며 한류의 상징이 되었다."],
+["야인시대","Era of Warriors","2002","SBS","사극","김영철, 안재모","김두한의 일대기를 다룬 시대극. 높은 시청률과 수많은 유행어를 남겼다."],
+["다모","Damo","2003","MBC","사극","이서진, 하지원","조선 시대 여성 포졸 '다모'를 소재로 한 작품. 마니아층이 두터운 '다모폐인' 현상을 낳았다."],
+["대장금","Dae Jang Geum","2003","MBC","사극","이영애, 지진희","궁중 수라간 나인에서 어의녀가 된 장금의 성공담. 60여 개국에 수출되며 한류 대표작이 되었다."],
+["올인","All In","2003","SBS","멜로","이병헌, 송혜교","실존 인물 차민수를 모티브로 한 도박 소재 멜로. 제주도 올인하우스 촬영지가 관광 명소가 되었다."],
+["천국의 계단","Stairway to Heaven","2003","SBS","멜로","권상우, 최지우","사랑·배신·불치병이 얽힌 정통 멜로 드라마. 해외에서 큰 인기를 모았다."],
+["불멸의 이순신","Immortal Admiral Yi Sun-sin","2004","KBS1","사극","김명민","이순신 장군의 생애를 그린 대하 사극. 김명민의 연기가 호평을 받았다."],
+["파리의 연인","Lovers in Paris","2004","SBS","로맨틱코미디","박신양, 김정은","'애기야, 가자' 등 명대사를 남긴 재벌과 평범한 여성의 사랑 이야기. 최고 시청률 50%대를 기록했다."],
+["풀하우스","Full House","2004","KBS2","로맨틱코미디","비, 송혜교","동명의 만화를 원작으로 한 계약 동거 로맨스. 아시아 전역에서 인기를 얻었다."],
+["내 이름은 김삼순","My Lovely Sam Soon","2005","MBC","로맨틱코미디","김선아, 현빈","30대 파티시에 삼순의 솔직한 연애와 일. '현실 로코'의 새 지평을 열었다."],
+["프라하의 연인","Lovers in Prague","2005","SBS","멜로","전도연, 김주혁","체코 프라하를 배경으로 한 국정원 요원과 외교관의 사랑 이야기."],
+["슬픈연가","Sad Love Story","2005","KBS2","멜로","권상우, 김희선","기억과 복수, 사랑이 얽힌 정통 멜로."],
+["쾌걸 춘향","Fantasy Couple (Chunhyang)","2005","KBS2","로맨틱코미디","한가인, 재희","고전 '춘향전'을 현대 고등학생 이야기로 재해석한 코믹 로맨스."],
+["연애시대","Alone in Love","2006","SBS","멜로","감우성, 손예진","이혼한 부부가 다시 서로를 알아가는 과정을 섬세하게 그린 작품. 마니아의 사랑을 받았다."],
+["환상의 커플","Fantastic Couple","2006","MBC","로맨틱코미디","한예슬, 오지호","재벌 3세와 사기꾼 여성의 좌충우돌 코믹 로맨스."],
+["눈의 여왕","Snow Queen","2006","KBS2","멜로","현빈, 성유리","안데르센 동화에서 모티브를 얻은 눈물의 멜로드라마."],
+["거침없이 하이킥","High Kick!","2006","MBC","시트콤","정준하, 김혜성, 서민정","순재네 가족의 일상을 코믹하게 그린 시트콤. 시즌제로 이어지며 큰 사랑을 받았다."],
+["주몽","Jumong","2006","MBC","사극","송일국, 한혜진","고구려 건국자 주몽의 일대기. 최고 시청률 50%를 넘기며 사극 붐을 이끌었다."],
+["하얀거탑","White Tower","2007","MBC","메디컬","김명민, 이선균","대학병원 내 권력 투쟁과 의사의 야망을 사실적으로 그린 메디컬 드라마의 명작."],
+["커피프린스 1호점","Coffee Prince","2007","MBC","로맨틱코미디","공유, 윤은혜","남장 여자와 카페 사장의 로맨스. 청춘 로코의 대표작이자 카페 문화 열풍을 일으켰다."],
+["태왕사신기","The Legend","2007","MBC","판타지사극","배용준, 문소리","광개토대왕을 신화와 접목해 그린 대작 판타지 사극."],
+["외과의사 봉달희","Surgeon Bong Dal-hee","2007","SBS","메디컬","이요원, 이범수","레지던트 봉달희의 성장 과정을 그린 의학 드라마."],
+["이산","Yi San","2007","MBC","사극","이서진, 한지민","조선 정조의 즉위 과정과 개혁을 그린 사극."],
+["마왕","Evil Reigns","2007","KBS2","스릴러","주지훈, 엄태웅","복수를 소재로 한 스릴러. 짜임새 있는 연출로 마니아 층을 만들었다."],
+["베토벤 바이러스","Beethoven Virus","2008","MBC","휴먼드라마","김명민, 이지아","오케스트라 단원들의 성장과 열정을 그린 작품. '강마에' 캐릭터가 큰 인기를 얻었다."],
+["그들이 사는 세상","Worlds Within","2008","KBS2","멜로","현빈, 송혜교","방송 드라마 제작진의 일과 사랑을 담은 작품."],
+["에덴의 동쪽","East of Eden","2008","MBC","멜로","송승헌, 연정훈","형제의 엇갈린 운명과 복수를 그린 대하 멜로. 고(高) 시청률을 기록했다."],
+["아이리스","Iris","2009","KBS2","액션","이병헌, 김태희","국가 비밀조직을 둘러싼 첩보 액션물. 대규모 해외 로케이션이 화제였다."],
+["꽃보다 남자","Boys Over Flowers","2009","KBS2","로맨틱코미디","구혜선, 이민호","일본 만화 원작의 청춘 로맨스. 이민호의 대표작이자 아시아 전역에서 인기를 모았다."],
+["선덕여왕","Queen Seondeok","2009","MBC","사극","이요원, 고현정","신라 최초의 여왕 선덕여왕과 미실의 대결을 그린 사극. 최고 시청률 40%대를 기록했다."],
+["내조의 여왕","Queen of Housewives","2009","MBC","로맨틱코미디","김남주, 오지호","남편을 성공시키려는 아내의 코믹 분투기."],
+["찬란한 유산","Brilliant Legacy","2009","SBS","로맨틱코미디","이승기, 한효주","재벌가 상속을 둘러싼 가족 로맨스. 최고 시청률 40%대를 기록했다."],
+["미남이시네요","You're Beautiful","2009","SBS","로맨틱코미디","장근석, 박신혜","남장 소녀가 아이돌 밴드에 들어가며 벌어지는 이야기."]
+].map(a=>({t:a[0],e:a[1],y:a[2],n:a[3],g:a[4],c:a[5],s:a[6]}));
+
+const $=id=>document.getElementById(id);
+let G="전체",Y="전체";
+const genres=["전체",...new Set(D.map(d=>d.g))];
+const years=["전체",...[...new Set(D.map(d=>d.y))].sort()];
+function chips(el,arr,get,set){
+  arr.forEach(v=>{const b=document.createElement("button");b.className="chip"+(v==="전체"?" on":"");b.textContent=v;
+    b.onclick=()=>{set(v);el.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on",c===b));render()};el.appendChild(b)});
+}
+chips($("gen"),genres,0,v=>G=v);
+chips($("yr"),years,0,v=>Y=v);
+function render(){
+  const q=$("q").value.trim().toLowerCase();
+  const list=D.filter(d=>(G==="전체"||d.g===G)&&(Y==="전체"||d.y===Y)&&
+    (!q||[d.t,d.e,d.n,d.c,d.g].join(" ").toLowerCase().includes(q)));
+  $("grid").innerHTML=list.map(d=>`<div class="card" data-t="${d.t}">
+    <span class="year">${d.y}</span><h2>${d.t}</h2><div class="en">${d.e}</div>
+    <div class="meta"><b>방송</b> ${d.n}<br><b>출연</b> ${d.c}</div>
+    <span class="tag">${d.g}</span></div>`).join("");
+  $("empty").style.display=list.length?"none":"block";
+  $("sc").textContent=list.length;$("st").textContent=D.length;
+}
+$("q").oninput=render;
+$("grid").onclick=e=>{
+  const c=e.target.closest(".card");if(!c)return;
+  const d=D.find(x=>x.t===c.dataset.t);
+  $("dlg").innerHTML=`<button class="x" aria-label="닫기">✕</button>
+    <span class="year">${d.y}</span><h3>${d.t}</h3><div class="en">${d.e}</div>
+    <div class="meta"><b>방송사</b> ${d.n}<br><b>장르</b> ${d.g}<br><b>출연</b> ${d.c}</div>
+    <p>${d.s}</p>`;
+  $("modal").classList.add("show");
+};
+$("modal").onclick=e=>{if(e.target.id==="modal"||e.target.classList.contains("x"))$("modal").classList.remove("show")};
+document.onkeydown=e=>{if(e.key==="Escape")$("modal").classList.remove("show")};
+render();
+</script>
+</body>
+</html>
